@@ -13,6 +13,8 @@ TEMPLATE = lib
 
 DEFINES += LIBQUPDOWNIO_LIBRARY
 
+LIBS += -lqjson
+
 # Install directory
 isEmpty( INSTALLDIR ) {
     INSTALLDIR = /usr/local/qupdownio/$$TARGET
@@ -25,10 +27,12 @@ UI_DIR = $$OBJECTS_DIR
 MOC_DIR = $$OBJECTS_DIR
 RCC_DIR = $$OBJECTS_DIR
 
-SOURCES += libqupdownio.cpp
+SOURCES += libqupdownio.cpp \
+    check.cpp
 
 HEADERS += libqupdownio.h\
-        libqupdownio_global.h
+        libqupdownio_global.h \
+    check.h
 
 unix:!symbian {
     maemo5 {
