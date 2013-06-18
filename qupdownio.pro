@@ -1,3 +1,4 @@
 TEMPLATE = subdirs
-SUBDIRS = libqupdownio qupdownio-ui
+SUBDIRS = libqupdownio qupdownio-ui \
+    libqupdownio-tests
 

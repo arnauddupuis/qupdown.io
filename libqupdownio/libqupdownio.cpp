@@ -1,4 +1,5 @@
 #include "libqupdownio.h"
+#include <QDebug>
 
 
 Qupdownio::Qupdownio(QObject *parent, const QString &p_apiKey) : QObject(parent),m_apiKey(p_apiKey),m_baseUrl("https://beta.updown.io/api")
@@ -54,14 +55,23 @@ void Qupdownio::addCheck(const QString &p_url, const int &p_period, const bool &
 }
 
 void Qupdownio::updateCheck(const QString &p_token, const QString &p_url, const int &p_period, const bool &p_published){
-	//
+    QByteArray ba;
+    ba.append( "url="+p_url );
+    ba.append( "period="+p_period );
+    ba.append( "published="+p_published );
+    m_networkManager->put( QNetworkRequest( QUrl( m_baseUrl+"checks/"+p_token+"?api-key="+m_apiKey ) ), ba );
 }
 
 void Qupdownio::deleteCheck(const QString &p_token){
-	//
+    m_networkManager->deleteResource( QNetworkRequest( QUrl( m_baseUrl+"checks/"+p_token+"?api-key="+m_apiKey) ) );
 }
 
 void Qupdownio::requestFinished(QNetworkReply *p_reply){
-	//
+    QVariantMap result = replyToJson(p_reply);
+    QNetworkRequest request = p_reply->request();
+    qDebug() << "Qupdownio::requestFinished : URL path = " << request.url().path();
+    if(result.count() > 0){
+        // TODO
+    }
 }
 
