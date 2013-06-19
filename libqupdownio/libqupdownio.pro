@@ -8,7 +8,7 @@ QT       += network
 
 QT       -= gui
 
-TARGET = libqupdownio
+TARGET = qupdownio
 TEMPLATE = lib
 
 DEFINES += LIBQUPDOWNIO_LIBRARY
@@ -17,7 +17,7 @@ LIBS += -lqjson
 
 # Install directory
 isEmpty( INSTALLDIR ) {
-    INSTALLDIR = /usr/local/qupdownio/$$TARGET
+    INSTALLDIR = /usr/local/lib
     win32:INSTALLDIR = "C:\Program Files\qupdownio\$$TARGET"
     macx:INSTALLDIR = "/Applications"
 }

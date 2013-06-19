@@ -4,12 +4,14 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = qupdownio-ui
 TEMPLATE = app
+
+LIBS += -lqupdownio
 
 # Install directory
 isEmpty( INSTALLDIR ) {
@@ -17,6 +19,10 @@ isEmpty( INSTALLDIR ) {
     win32:INSTALLDIR = "C:\Program Files\qupdownio\$$TARGET"
     macx:INSTALLDIR = "/Applications"
 }
+
+INCLUDEPATH += ../libqupdownio
+
+DEPENDPATH += ../libqupdownio
 
 OBJECTS_DIR = ../build
 UI_DIR = $$OBJECTS_DIR
