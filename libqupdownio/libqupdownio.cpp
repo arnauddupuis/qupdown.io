@@ -16,12 +16,18 @@ Qupdownio::~Qupdownio(){
 
 QVariantMap Qupdownio::replyToJson(QNetworkReply *p_reply){
 	QString json = p_reply->readAll();
-	qDebug() << "Qupdownio::replyToJson : raw JSON = " << json;
+    qDebug() << "Qupdownio::replyToJson : raw JSON = " << json << "\n\n";
 	bool ok = false;
-	QVariantMap result = m_parser->parse(json.toUtf8(), &ok).toMap();
+    QVariant result = m_parser->parse(json.toUtf8(), &ok);
+    qDebug() << "Qupdownio::replyToJson : result=" << result << "\n\n";
+    foreach (QVariant v, result.toList()){
+        QVariantMap m = v.toMap();
+        qDebug() << "Qupdownio::replyToJson : m = " << m << "\n\n";
+    }
+
 	if(ok){
 		qDebug() << "Qupdownio::replyToJson : parsing successful";
-		return result;
+        return result.toMap();
 	}
 	else{
 		qDebug() << "Qupdownio::replyToJson : error while parsing : " << m_parser->errorString();
