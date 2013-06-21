@@ -52,27 +52,28 @@ void Qupdownio::checks(){
 }
 
 void Qupdownio::downtimes(const QString &p_token, const int &p_page){
-	m_networkManager->get( QNetworkRequest( QUrl( m_baseUrl+"checks/"+p_token+"/downtimes?api-key="+m_apiKey+"&page="+p_page ) ) );
+    qDebug() << "Qupdownio::downtimes: URL=" << m_baseUrl+"/checks/"+p_token+"/downtimes?api-key="+m_apiKey+"&page="+QString::number(p_page) ;
+    m_networkManager->get( QNetworkRequest( QUrl( m_baseUrl+"/checks/"+p_token+"/downtimes?api-key="+m_apiKey+"&page="+QString::number(p_page) ) ) );
 }
 
 void Qupdownio::addCheck(const QString &p_url, const int &p_period, const bool &p_published){
 	QByteArray ba;
 	ba.append( "url="+p_url );
-	ba.append( "period="+p_period );
+    ba.append( "period="+QString::number(p_period) );
 	ba.append( "published="+p_published );
-	m_networkManager->post( QNetworkRequest( QUrl( m_baseUrl+"checks?api-key="+m_apiKey ) ), ba );
+    m_networkManager->post( QNetworkRequest( QUrl( m_baseUrl+"/checks?api-key="+m_apiKey ) ), ba );
 }
 
 void Qupdownio::updateCheck(const QString &p_token, const QString &p_url, const int &p_period, const bool &p_published){
     QByteArray ba;
     ba.append( "url="+p_url );
-    ba.append( "period="+p_period );
+    ba.append( "period="+QString::number(p_period) );
     ba.append( "published="+p_published );
-    m_networkManager->put( QNetworkRequest( QUrl( m_baseUrl+"checks/"+p_token+"?api-key="+m_apiKey ) ), ba );
+    m_networkManager->put( QNetworkRequest( QUrl( m_baseUrl+"/checks/"+p_token+"?api-key="+m_apiKey ) ), ba );
 }
 
 void Qupdownio::deleteCheck(const QString &p_token){
-    m_networkManager->deleteResource( QNetworkRequest( QUrl( m_baseUrl+"checks/"+p_token+"?api-key="+m_apiKey) ) );
+    m_networkManager->deleteResource( QNetworkRequest( QUrl( m_baseUrl+"/checks/"+p_token+"?api-key="+m_apiKey) ) );
 }
 
 void Qupdownio::requestFinished(QNetworkReply *p_reply){

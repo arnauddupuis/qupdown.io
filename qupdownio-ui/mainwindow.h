@@ -18,6 +18,8 @@ public:
     
 private slots:
 	void on_checksPushButton_clicked();
+    void on_downtimesPushButton_clicked();
+    void on_checksFinished(QList<LibQupdownio::Check*> p_list);
 
 private:
     Ui::MainWindow *ui;

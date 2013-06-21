@@ -27,19 +27,6 @@
      <string>Checks</string>
     </property>
    </widget>
-   <widget class="QLabel" name="statusLabel">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>160</y>
-      <width>271</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
@@ -61,6 +48,29 @@
       <widget class="QLineEdit" name="apiKeyLineEdit"/>
      </item>
     </layout>
+   </widget>
+   <widget class="QComboBox" name="tokenComboBox">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>110</y>
+      <width>85</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="downtimesPushButton">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>150</y>
+      <width>100</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>downtimes</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
