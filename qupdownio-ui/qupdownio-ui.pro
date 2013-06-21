@@ -30,11 +30,14 @@ MOC_DIR = $$OBJECTS_DIR
 RCC_DIR = $$OBJECTS_DIR
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    qupdowniosettings.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    qupdowniosettings.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    qupdowniosettings.ui
 
 target.path = $$INSTALLDIR/bin
 win32:target.path = $$INSTALLDIR
@@ -42,3 +45,6 @@ maxc:target.path = $$INSTALLDIR
 
 
 INSTALLS += target
+
+RESOURCES += \
+    qupdownio-ui-res.qrc

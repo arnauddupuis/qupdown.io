@@ -76,12 +76,37 @@ void Qupdownio::deleteCheck(const QString &p_token){
 }
 
 void Qupdownio::requestFinished(QNetworkReply *p_reply){
-    QVariantMap result = replyToJson(p_reply);
-    QNetworkRequest request = p_reply->request();
-    qDebug() << "Qupdownio::requestFinished : URL path = " << request.url().path();
-    qDebug() << "Qupdownio::requestFinished : map = " << result;
-    if(result.count() > 0){
-        // TODO
-    }
+	QString json = p_reply->readAll();
+	QNetworkRequest request = p_reply->request();
+	qDebug() << "Qupdownio::requestFinished : URL path = " << request.url().path();
+	qDebug() << "Qupdownio::requestFinished : raw JSON = " << json << "\n\n";
+	bool ok = false;
+	QVariant result = m_parser->parse(json.toUtf8(), &ok);
+	qDebug() << "Qupdownio::requestFinished : result=" << result << "\n\n";
+	if(!result.isNull()){
+		if( request.url().path() == "/api/checks" ){
+			QList<LibQupdownio::Check*> checksList;
+			foreach (QVariant v, result.toList()){
+			    QVariantMap map = v.toMap();
+			    LibQupdownio::Check *check = new LibQupdownio::Check(this);
+//			    qDebug() << "Qupdownio::requestFinished : m = " << map << "\n\n";
+			    // m =  QMap(("down", QVariant(bool, false) ) ( "down_since" ,  QVariant(, ) ) ( "enabled" ,  QVariant(bool, true) ) ( "error" ,  QVariant(, ) ) ( "last_check_at" ,  QVariant(QString, "2013-06-21 04:36:14 UTC") ) ( "next_check_at" ,  QVariant(QString, "2013-06-21 04:36:44 UTC") ) ( "period" ,  QVariant(qulonglong, 30) ) ( "published" ,  QVariant(bool, false) ) ( "token" ,  QVariant(QString, "63y4") ) ( "uptime" ,  QVariant(double, 99.997) ) ( "url" ,  QVariant(QString, "http://www.genymobile.com") ) )
+			    check->setToken( map.value("token").toString() );
+			    check->setDown( map.value("down").toBool() );
+			    check->setDownSince( map.value("down_since").toDateTime() );
+			    check->setEnabled( map.value("enabled").toBool() );
+			    check->setError( map.value("error").toString() );
+			    check->setLastCheckAt( map.value("last_check_at").toDateTime() );
+//			    qDebug() << "Qupdownio::requestFinished : check->lastCheckAt() = " << check->lastCheckAt().toString("yyyy-MM-dd hh::mm::ss") << "\n\n";
+			    check->setNextCheckAt( map.value("next_check_at").toDateTime() );
+			    check->setPeriod( map.value("period").toInt() );
+			    check->setPublished( map.value("published").toBool() );
+			    check->setUptime( map.value("uptime").toDouble() );
+			    check->setUrl( map.value("url").toUrl() );
+			    checksList.append(check);
+			}
+			emit( checksFinished( checksList ) );
+		}
+	}
 }
 

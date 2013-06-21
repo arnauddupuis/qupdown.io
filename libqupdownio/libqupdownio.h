@@ -2,11 +2,13 @@
 #define LIBQUPDOWNIO_H
 
 #include "libqupdownio_global.h"
+#include "check.h"
 #include <QObject>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QVariantMap>
 #include "qjson/parser.h"
+#include <QList>
 
 class LIBQUPDOWNIOSHARED_EXPORT Qupdownio: public QObject
 {
@@ -63,6 +65,8 @@ public slots:
      */
     void deleteCheck(const QString& p_token);
     void setProxy(const QNetworkProxy &p_proxy);
+signals:
+    void checksFinished(QList<LibQupdownio::Check*>);
 private slots:
 	void requestFinished(QNetworkReply*);
 protected:
