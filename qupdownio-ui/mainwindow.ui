@@ -6,19 +6,22 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>484</width>
-    <height>277</height>
+    <width>695</width>
+    <height>549</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="checksPushButton">
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>100</y>
+      <y>240</y>
       <width>100</width>
       <height>24</height>
      </rect>
@@ -31,7 +34,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>30</y>
+      <y>170</y>
       <width>321</width>
       <height>41</height>
      </rect>
@@ -53,7 +56,7 @@
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>110</y>
+      <y>250</y>
       <width>85</width>
       <height>24</height>
      </rect>
@@ -63,7 +66,7 @@
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>150</y>
+      <y>290</y>
       <width>100</width>
       <height>24</height>
      </rect>
@@ -72,13 +75,151 @@
      <string>downtimes</string>
     </property>
    </widget>
+   <widget class="QWidget" name="layoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>269</width>
+      <height>62</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="maximumSize">
+        <size>
+         <width>22</width>
+         <height>60</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="qupdownio-ui-res.qrc">:/images/updown-logo.png</pixmap>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>60</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-family: &quot;Oleo Script&quot;,cursive;
+font-style: italic;
+font-weight: normal;
+font-size: 24pt;
+color: #6b0;
+text-shadow: 0 1px 0 #fff,0 -1px 0 #457e00;
+</string>
+       </property>
+       <property name="text">
+        <string>Q</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="margin">
+        <number>3</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>60</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #555;
+font-style: italic;
+font-family: &quot;Oleo Script&quot;,cursive;
+font-size: 24pt;
+font-weight: normal;
+text-shadow: 0 1px 0 #fff,0 -1px 0 #000;
+</string>
+       </property>
+       <property name="text">
+        <string>Updown</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>60</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-family: &quot;Oleo Script&quot;,cursive;
+font-style: italic;
+font-weight: normal;
+font-size: 24pt;
+color: #6b0;
+text-shadow: 0 1px 0 #fff,0 -1px 0 #457e00;
+</string>
+       </property>
+       <property name="text">
+        <string>.io</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="menuWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>70</y>
+      <width>321</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: 1px solid white;</string>
+    </property>
+    <widget class="QLabel" name="arrowPixmapLabel">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>10</y>
+       <width>20</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="qupdownio-ui-res.qrc">:/images/arrow-right.png</pixmap>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>484</width>
+     <width>695</width>
      <height>21</height>
     </rect>
    </property>
@@ -94,6 +235,8 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="qupdownio-ui-res.qrc"/>
+ </resources>
  <connections/>
 </ui>
