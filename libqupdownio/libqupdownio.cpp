@@ -108,6 +108,28 @@ void Qupdownio::requestFinished(QNetworkReply *p_reply){
 			}
 			emit( checksFinished( checksList ) );
 		}
+        else if( request.url().path().endsWith("/downtimes") ){
+            foreach (QVariant v, result.toList()){
+                QVariantMap map = v.toMap();
+                LibQupdownio::Check *check = new LibQupdownio::Check(this);
+                qDebug() << "Qupdownio::requestFinished : m = " << map << "\n\n";
+//			     result= QVariant(QVariantList, (QVariant(QVariantMap, QMap(("duration", QVariant(qulonglong, 76) ) ( "ended_at" ,  QVariant(QString, "2013-04-22 16:13:54 UTC") ) ( "error" ,  QVariant(QString, "Errno::ETIMEDOUT") ) ( "started_at" ,  QVariant(QString, "2013-04-22 16:12:39 UTC") ) )  ) )  )
+
+                check->setToken( map.value("token").toString() );
+                check->setDown( map.value("down").toBool() );
+                check->setDownSince( map.value("down_since").toDateTime() );
+                check->setEnabled( map.value("enabled").toBool() );
+                check->setError( map.value("error").toString() );
+                check->setLastCheckAt( map.value("last_check_at").toDateTime() );
+//			    qDebug() << "Qupdownio::requestFinished : check->lastCheckAt() = " << check->lastCheckAt().toString("yyyy-MM-dd hh::mm::ss") << "\n\n";
+                check->setNextCheckAt( map.value("next_check_at").toDateTime() );
+                check->setPeriod( map.value("period").toInt() );
+                check->setPublished( map.value("published").toBool() );
+                check->setUptime( map.value("uptime").toDouble() );
+                check->setUrl( map.value("url").toUrl() );
+//                checksList.append(check);
+            }
+        }
 	}
 }
 
