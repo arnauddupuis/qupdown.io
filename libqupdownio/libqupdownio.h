@@ -3,6 +3,7 @@
 
 #include "libqupdownio_global.h"
 #include "check.h"
+#include "checkerror.h"
 #include <QObject>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -66,7 +67,14 @@ public slots:
     void deleteCheck(const QString& p_token);
     void setProxy(const QNetworkProxy &p_proxy);
 signals:
+    /*!
+     * \brief checksFinished is emitted after a reply to a checks() call is available.
+     */
     void checksFinished(QList<LibQupdownio::Check*>);
+    /*!
+     * \brief downtimesFinished is emitted after a reply to a downtimes() call is available.
+     */
+    void downtimesFinished(QList<LibQupdownio::CheckError*>);
 private slots:
 	void requestFinished(QNetworkReply*);
 protected:

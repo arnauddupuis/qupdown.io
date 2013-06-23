@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -8,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     m_qupdownio = new Qupdownio(this);
     connect(m_qupdownio,SIGNAL(checksFinished(QList<LibQupdownio::Check*>)),this,SLOT(on_checksFinished(QList<LibQupdownio::Check*>)));
+    connect(m_qupdownio,SIGNAL(downtimesFinished(QList<LibQupdownio::CheckError*>)),this,SLOT(on_downtimesFinished(QList<LibQupdownio::CheckError*>)));
 }
 
 MainWindow::~MainWindow()
@@ -29,4 +31,10 @@ void MainWindow::on_checksFinished(QList<LibQupdownio::Check *> p_list){
     foreach( LibQupdownio::Check *check, p_list ){
         ui->tokenComboBox->addItem(check->token());
     }
+}
+
+void MainWindow::on_downtimesFinished(QList<LibQupdownio::CheckError *> p_list){
+	foreach( LibQupdownio::CheckError *ce, p_list ){
+		qDebug() << "Downtime: start: " << ce->startedAt().toString("yyyy-MM-dd@hh:mm:ss") << " duration: " << ce->duration() << " error: " << ce->error() << " end: " << ce->endedAt().toString("yyyy-MM-dd@hh:mm:ss");
+	}
 }
