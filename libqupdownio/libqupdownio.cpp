@@ -52,7 +52,7 @@ void Qupdownio::checks(){
 }
 
 void Qupdownio::downtimes(const QString &p_token, const int &p_page){
-	qDebug() << "Qupdownio::downtimes: URL=" << m_baseUrl+"/checks/"+p_token+"/downtimes?api-key="+m_apiKey+"&page="+QString::number(p_page) ;
+//	qDebug() << "Qupdownio::downtimes: URL=" << m_baseUrl+"/checks/"+p_token+"/downtimes?api-key="+m_apiKey+"&page="+QString::number(p_page) ;
 	m_networkManager->get( QNetworkRequest( QUrl( m_baseUrl+"/checks/"+p_token+"/downtimes?api-key="+m_apiKey+"&page="+QString::number(p_page) ) ) );
 }
 
@@ -79,11 +79,11 @@ void Qupdownio::deleteCheck(const QString &p_token){
 void Qupdownio::requestFinished(QNetworkReply *p_reply){
 	QString json = p_reply->readAll();
 	QNetworkRequest request = p_reply->request();
-	qDebug() << "Qupdownio::requestFinished : URL path = " << request.url().path();
-	qDebug() << "Qupdownio::requestFinished : raw JSON = " << json << "\n\n";
+//	qDebug() << "Qupdownio::requestFinished : URL path = " << request.url().path();
+//	qDebug() << "Qupdownio::requestFinished : raw JSON = " << json << "\n\n";
 	bool ok = false;
 	QVariant result = m_parser->parse(json.toUtf8(), &ok);
-	qDebug() << "Qupdownio::requestFinished : result=" << result << "\n\n";
+//	qDebug() << "Qupdownio::requestFinished : result=" << result << "\n\n";
 	if(!result.isNull()){
 		if( request.url().path() == "/api/checks" ){
 			QList<LibQupdownio::Check*> checksList;
@@ -113,7 +113,7 @@ void Qupdownio::requestFinished(QNetworkReply *p_reply){
 			foreach (QVariant v, result.toList()){
 				QVariantMap map = v.toMap();
 				LibQupdownio::CheckError *checkerror = new LibQupdownio::CheckError(this);
-				qDebug() << "Qupdownio::requestFinished : m = " << map << "\n\n";
+//				qDebug() << "Qupdownio::requestFinished : m = " << map << "\n\n";
 				//			     result= QVariant(QVariantList, (QVariant(QVariantMap, QMap(("duration", QVariant(qulonglong, 76) ) ( "ended_at" ,  QVariant(QString, "2013-04-22 16:13:54 UTC") ) ( "error" ,  QVariant(QString, "Errno::ETIMEDOUT") ) ( "started_at" ,  QVariant(QString, "2013-04-22 16:12:39 UTC") ) )  ) )  )
 
 				checkerror->setDuration( map.value("duration").toDouble() );
