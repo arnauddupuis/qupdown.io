@@ -28,11 +28,13 @@ MOC_DIR = $$OBJECTS_DIR
 RCC_DIR = $$OBJECTS_DIR
 
 SOURCES += libqupdownio.cpp \
-    check.cpp
+    check.cpp \
+    checkerror.cpp
 
 HEADERS += libqupdownio.h\
         libqupdownio_global.h \
-    check.h
+    check.h \
+    checkerror.h
 
 unix:!symbian {
     maemo5 {
@@ -44,4 +46,5 @@ unix:!symbian {
 }
 
 OTHER_FILES += \
-    check.ini
+    check.ini \
+    checkerror.ini
