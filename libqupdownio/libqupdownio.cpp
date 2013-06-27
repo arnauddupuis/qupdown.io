@@ -58,17 +58,27 @@ void Qupdownio::downtimes(const QString &p_token, const int &p_page){
 
 void Qupdownio::addCheck(const QString &p_url, const int &p_period, const bool &p_published){
 	QByteArray ba;
-	ba.append( "url="+p_url );
+	QUrl t_url(p_url);
+	ba.append( "url='"+t_url.toEncoded()+"'" );
+//	ba.append( "url="+p_url );
 	ba.append( "period="+QString::number(p_period) );
-	ba.append( "published="+p_published );
-	m_networkManager->post( QNetworkRequest( QUrl( m_baseUrl+"/checks?api-key="+m_apiKey ) ), ba );
+	if( p_published )
+		ba.append( "published=true" );
+	else
+		ba.append( "published=false" );
+	QNetworkRequest t_request( QUrl( m_baseUrl+"/checks?api-key="+m_apiKey+"&url=http://www.yahoo.fr" ) );
+	t_request.setHeader(QNetworkRequest::ContentTypeHeader	,"application/x-www-form-urlencoded");
+	m_networkManager->post( t_request, ba );
 }
 
 void Qupdownio::updateCheck(const QString &p_token, const QString &p_url, const int &p_period, const bool &p_published){
 	QByteArray ba;
 	ba.append( "url="+p_url );
 	ba.append( "period="+QString::number(p_period) );
-	ba.append( "published="+p_published );
+	if( p_published )
+		ba.append( "published=true" );
+	else
+		ba.append( "published=false" );
 	m_networkManager->put( QNetworkRequest( QUrl( m_baseUrl+"/checks/"+p_token+"?api-key="+m_apiKey ) ), ba );
 }
 
@@ -79,12 +89,12 @@ void Qupdownio::deleteCheck(const QString &p_token){
 void Qupdownio::requestFinished(QNetworkReply *p_reply){
 	QString json = p_reply->readAll();
 	QNetworkRequest request = p_reply->request();
-//	qDebug() << "Qupdownio::requestFinished : URL path = " << request.url().path();
-//	qDebug() << "Qupdownio::requestFinished : raw JSON = " << json << "\n\n";
+	qDebug() << "Qupdownio::requestFinished : URL path = " << request.url().path();
+	qDebug() << "Qupdownio::requestFinished : raw JSON = " << json << "\n\n";
 	bool ok = false;
 	QVariant result = m_parser->parse(json.toUtf8(), &ok);
 //	qDebug() << "Qupdownio::requestFinished : result=" << result << "\n\n";
-	if(!result.isNull()){
+	if(ok && !result.isNull()){
 		if( request.url().path() == "/api/checks" ){
 			QList<LibQupdownio::Check*> checksList;
 			foreach (QVariant v, result.toList()){
@@ -124,6 +134,7 @@ void Qupdownio::requestFinished(QNetworkReply *p_reply){
 			}
 			emit( downtimesFinished(downtimesList) );
 		}
+//		else if( request )
 	}
 }
 

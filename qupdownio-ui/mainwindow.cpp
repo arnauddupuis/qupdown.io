@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_qupdownio = new Qupdownio(this);
     connect(m_qupdownio,SIGNAL(checksFinished(QList<LibQupdownio::Check*>)),this,SLOT(on_checksFinished(QList<LibQupdownio::Check*>)));
     connect(m_qupdownio,SIGNAL(downtimesFinished(QList<LibQupdownio::CheckError*>)),this,SLOT(on_downtimesFinished(QList<LibQupdownio::CheckError*>)));
+    m_shadow = new QGraphicsDropShadowEffect(ui->menuWidget);
 }
 
 MainWindow::~MainWindow()
@@ -37,4 +38,9 @@ void MainWindow::on_downtimesFinished(QList<LibQupdownio::CheckError *> p_list){
 	foreach( LibQupdownio::CheckError *ce, p_list ){
 		qDebug() << "Downtime: start: " << ce->startedAt().toString("yyyy-MM-dd@hh:mm:ss") << " duration: " << ce->duration() << " error: " << ce->error() << " end: " << ce->endedAt().toString("yyyy-MM-dd@hh:mm:ss");
 	}
+}
+
+void MainWindow::on_addCheckPushButton_clicked(){
+	m_qupdownio->setApiKey(ui->apiKeyLineEdit->text());
+	m_qupdownio->addCheck(ui->hostLineEdit->text(),30,false);
 }

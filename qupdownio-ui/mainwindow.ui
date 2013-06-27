@@ -108,7 +108,7 @@
       <widget class="QLabel" name="label_4">
        <property name="maximumSize">
         <size>
-         <width>31</width>
+         <width>35</width>
          <height>60</height>
         </size>
        </property>
@@ -212,6 +212,41 @@ text-shadow: 0 1px 0 #fff,0 -1px 0 #457e00;
       <pixmap resource="qupdownio-ui-res.qrc">:/images/arrow-right.png</pixmap>
      </property>
     </widget>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>230</y>
+      <width>321</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="apiKeyLabel_2">
+       <property name="text">
+        <string>Host</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="hostLineEdit"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="addCheckPushButton">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>360</y>
+      <width>100</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Add check</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
