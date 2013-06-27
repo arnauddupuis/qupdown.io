@@ -21,6 +21,8 @@ private slots:
 	void on_checksPushButton_clicked();
     void on_downtimesPushButton_clicked();
     void on_addCheckPushButton_clicked();
+    void on_updateCheckPushButton_clicked();
+    void on_deleteCheckPushButton_clicked();
     void on_checksFinished(QList<LibQupdownio::Check*> p_list);
     void on_downtimesFinished(QList<LibQupdownio::CheckError*> p_list);
 

@@ -59,31 +59,35 @@ void Qupdownio::downtimes(const QString &p_token, const int &p_page){
 void Qupdownio::addCheck(const QString &p_url, const int &p_period, const bool &p_published){
 	QByteArray ba;
 	QUrl t_url(p_url);
-	ba.append( "url='"+t_url.toEncoded()+"'" );
-//	ba.append( "url="+p_url );
-	ba.append( "period="+QString::number(p_period) );
-	if( p_published )
-		ba.append( "published=true" );
-	else
-		ba.append( "published=false" );
-	QNetworkRequest t_request( QUrl( m_baseUrl+"/checks?api-key="+m_apiKey+"&url=http://www.yahoo.fr" ) );
+    ba.append( "url="+t_url.toEncoded() );
+    ba.append( ";period="+QString::number(p_period) );
+    if( p_published )
+        ba.append( ";published=true" );
+    else
+        ba.append( ";published=false" );
+    QNetworkRequest t_request( QUrl( m_baseUrl+"/checks?api-key="+m_apiKey ) );
 	t_request.setHeader(QNetworkRequest::ContentTypeHeader	,"application/x-www-form-urlencoded");
 	m_networkManager->post( t_request, ba );
 }
 
 void Qupdownio::updateCheck(const QString &p_token, const QString &p_url, const int &p_period, const bool &p_published){
 	QByteArray ba;
-	ba.append( "url="+p_url );
-	ba.append( "period="+QString::number(p_period) );
+    QUrl t_url(p_url);
+    ba.append( "url="+t_url.toEncoded() );
+    ba.append( ";period="+QString::number(p_period) );
 	if( p_published )
-		ba.append( "published=true" );
+        ba.append( ";published=true" );
 	else
-		ba.append( "published=false" );
-	m_networkManager->put( QNetworkRequest( QUrl( m_baseUrl+"/checks/"+p_token+"?api-key="+m_apiKey ) ), ba );
+        ba.append( ";published=false" );
+    QNetworkRequest t_request( QUrl( m_baseUrl+"/checks/"+p_token+"?api-key="+m_apiKey ) );
+    t_request.setHeader(QNetworkRequest::ContentTypeHeader	,"application/x-www-form-urlencoded");
+    m_networkManager->put( t_request, ba );
 }
 
 void Qupdownio::deleteCheck(const QString &p_token){
-	m_networkManager->deleteResource( QNetworkRequest( QUrl( m_baseUrl+"/checks/"+p_token+"?api-key="+m_apiKey) ) );
+    QNetworkRequest t_request( QUrl( m_baseUrl+"/checks/"+p_token+"?api-key="+m_apiKey ) );
+    t_request.setHeader(QNetworkRequest::ContentTypeHeader	,"application/x-www-form-urlencoded");
+    m_networkManager->deleteResource( t_request );
 }
 
 void Qupdownio::requestFinished(QNetworkReply *p_reply){

@@ -44,3 +44,14 @@ void MainWindow::on_addCheckPushButton_clicked(){
 	m_qupdownio->setApiKey(ui->apiKeyLineEdit->text());
 	m_qupdownio->addCheck(ui->hostLineEdit->text(),30,false);
 }
+
+void MainWindow::on_updateCheckPushButton_clicked(){
+    m_qupdownio->setApiKey(ui->apiKeyLineEdit->text());
+    m_qupdownio->updateCheck(ui->tokenComboBox->currentText(),ui->hostLineEdit->text(),120,false);
+}
+
+void MainWindow::on_deleteCheckPushButton_clicked(){
+    m_qupdownio->setApiKey(ui->apiKeyLineEdit->text());
+    m_qupdownio->deleteCheck(ui->tokenComboBox->currentText());
+}
+

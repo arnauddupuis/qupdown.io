@@ -248,6 +248,32 @@ text-shadow: 0 1px 0 #fff,0 -1px 0 #457e00;
      <string>Add check</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="updateCheckPushButton">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>370</y>
+      <width>100</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Update check</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="deleteCheckPushButton">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>390</y>
+      <width>100</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Delete check</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
