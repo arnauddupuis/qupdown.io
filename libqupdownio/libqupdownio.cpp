@@ -94,7 +94,8 @@ void Qupdownio::requestFinished(QNetworkReply *p_reply){
 	QString json = p_reply->readAll();
 	QNetworkRequest request = p_reply->request();
 	qDebug() << "Qupdownio::requestFinished : URL path = " << request.url().path();
-	qDebug() << "Qupdownio::requestFinished : raw JSON = " << json << "\n\n";
+    qDebug() << "Qupdownio::requestFinished : raw JSON = " << json ;
+    qDebug() << "Qupdownio::requestFinished : reply operation = " << p_reply->operation() << "\n\n";
 	bool ok = false;
 	QVariant result = m_parser->parse(json.toUtf8(), &ok);
 //	qDebug() << "Qupdownio::requestFinished : result=" << result << "\n\n";
@@ -138,7 +139,37 @@ void Qupdownio::requestFinished(QNetworkReply *p_reply){
 			}
 			emit( downtimesFinished(downtimesList) );
 		}
-//		else if( request )
+        else if( p_reply->operation() == QNetworkAccessManager::DeleteOperation ){
+            QVariantMap map = result.toMap();
+            if(map.contains("deleted") ){
+                if(map.value("deleted").toString() == "true"){
+                    emit( deleteFinished(true,"Check successfully deleted.") );
+                }
+                else{
+                    emit( deleteFinished(false,"Error while deleting check.") );
+                }
+            }
+            else if( map.contains("error") ){
+                emit( deleteFinished(false, map.value("error").toString() ) );
+            }
+        }
+        else if( p_reply->operation() == QNetworkAccessManager::PutOperation ){
+            // {"token":"qhpy","enabled":true,"url":"http://www.google.fr","period":120,"published":false,"uptime":100.0,"down":false,"error":null,"down_since":null,"last_check_at":"2013-06-27 15:06:35 UTC","next_check_at":"2013-06-27 15:07:05 UTC"}
+            QVariantMap map = result.toMap();
+            LibQupdownio::Check check(this);
+            check.setToken( map.value("token").toString() );
+            check.setDown( map.value("down").toBool() );
+            check.setDownSince( map.value("down_since").toDateTime() );
+            check.setEnabled( map.value("enabled").toBool() );
+            check.setError( map.value("error").toString() );
+            check.setLastCheckAt( map.value("last_check_at").toDateTime() );
+            check.setNextCheckAt( map.value("next_check_at").toDateTime() );
+            check.setPeriod( map.value("period").toInt() );
+            check.setPublished( map.value("published").toBool() );
+            check.setUptime( map.value("uptime").toDouble() );
+            check.setUrl( map.value("url").toUrl() );
+            emit( updateFinished(check) );
+        }
 	}
 }
 
