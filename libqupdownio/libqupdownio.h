@@ -76,13 +76,17 @@ signals:
      */
     void downtimesFinished(QList<LibQupdownio::CheckError*>);
     /*!
-      * \breif deleteFinished is emitted after a reply to a deleteCheck() call is available.
+      * \breif deleteCheckFinished is emitted after a reply to a deleteCheck() call is available.
       */
-    void deleteFinished(bool status, QString& message);
+    void deleteCheckFinished(bool status, QString message);
     /*!
-     * \brief updateFinished is emitted after a reply to a updateCheck() call is available.
+     * \brief updateCheckFinished is emitted after a reply to a updateCheck() call is available.
      */
-    void updateFinished(LibQupdownio::Check);
+    void updateCheckFinished(LibQupdownio::Check*);
+    /*!
+     * \brief addCheckFinished is emitted after a reply to a addCheck() call is available.
+     */
+    void addCheckFinished(LibQupdownio::Check*);
 private slots:
 	void requestFinished(QNetworkReply*);
 protected:
