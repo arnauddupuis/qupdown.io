@@ -3,7 +3,8 @@
 
 QupdownioSettings::QupdownioSettings(QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::QupdownioSettings)
+	ui(new Ui::QupdownioSettings),
+	m_settings( new QSettings )
 {
 	ui->setupUi(this);
 }

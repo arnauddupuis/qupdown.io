@@ -131,7 +131,7 @@ text-shadow: 0 1px 0 #fff,0 -1px 0 #457e00;
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Here is the API server URL. During the beta phase it should be &lt;a href=&quot;https://beta.updaown.io/api&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#008080;&quot;&gt;https://beta.updaown.io/api&lt;/span&gt;&lt;/a&gt; and it will probably change when the service is out of beta.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string>https://beta.updown.io/api</string>
+        <string>https://updown.io/api</string>
        </property>
       </widget>
      </item>
@@ -215,16 +215,6 @@ text-shadow: 0 1px 0 #fff,0 -1px 0 #457e00;
     </layout>
    </item>
   </layout>
-  <zorder>layoutWidget</zorder>
-  <zorder>layoutWidget_2</zorder>
-  <zorder>label</zorder>
-  <zorder>label_2</zorder>
-  <zorder>label_3</zorder>
-  <zorder>apiKeyLabel</zorder>
-  <zorder>defaultPeriodLabel</zorder>
-  <zorder>defaultPeriodComboBox</zorder>
-  <zorder>layoutWidget_3</zorder>
-  <zorder>horizontalSpacer</zorder>
  </widget>
  <resources>
   <include location="qupdownio-ui-res.qrc"/>

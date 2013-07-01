@@ -2,6 +2,7 @@
 #define QUPDOWNIOSETTINGS_H
 
 #include <QWidget>
+#include <QSettings>
 
 namespace Ui {
 class QupdownioSettings;
@@ -17,6 +18,7 @@ public:
 	
 private:
 	Ui::QupdownioSettings *ui;
+	QSettings *m_settings;
 };
 
 #endif // QUPDOWNIOSETTINGS_H
