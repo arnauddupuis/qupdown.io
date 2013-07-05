@@ -9,6 +9,8 @@ QupdownioSettings::QupdownioSettings(QWidget *parent) :
 	ui->setupUi(this);
 	ui->apiKeyLineEdit->setText( m_settings->value("apiKey").toString() );
 	ui->apiUrlLineEdit->setText( m_settings->value("apiUrl").toString() );
+    ui->defaultPeriodComboBox->setCurrentIndex( ui->defaultPeriodComboBox->findText( m_settings->value("defaultPeriod").toString() ) );
+    ui->defaultPublishingComboBox->setCurrentIndex( ui->defaultPublishingComboBox->findText( m_settings->value("defaultPublishing").toString() ) );
 }
 
 QupdownioSettings::~QupdownioSettings()
