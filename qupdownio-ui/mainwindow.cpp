@@ -15,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect( m_qupdownio,SIGNAL(deleteCheckFinished(bool,QString)),this,SLOT(on_deleteFinished(bool,QString)) );
     connect( m_qupdownio,SIGNAL(addCheckFinished(LibQupdownio::Check*)),this,SLOT(on_addCheckFinished(LibQupdownio::Check*)) );
     m_shadow = new QGraphicsDropShadowEffect(ui->menuWidget);
+    m_settings = new QupdownioSettings();
+    m_settings->hide();
 }
 
 MainWindow::~MainWindow()
@@ -87,5 +89,9 @@ void MainWindow::on_updateCheckPushButton_clicked(){
 void MainWindow::on_deleteCheckPushButton_clicked(){
     m_qupdownio->setApiKey(ui->apiKeyLineEdit->text());
     m_qupdownio->deleteCheck(ui->tokenComboBox->currentText());
+}
+
+void MainWindow::on_settingsPushButton_clicked(){
+	m_settings->setVisible( !m_settings->isVisible() );
 }
 

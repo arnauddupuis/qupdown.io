@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "libqupdownio.h"
 #include <QGraphicsDropShadowEffect>
+#include "qupdowniosettings.h"
 
 namespace Ui {
 class MainWindow;
@@ -23,6 +24,7 @@ private slots:
 	void on_addCheckPushButton_clicked();
 	void on_updateCheckPushButton_clicked();
 	void on_deleteCheckPushButton_clicked();
+	void on_settingsPushButton_clicked();
 	void on_checksFinished(QList<LibQupdownio::Check*> p_list);
 	void on_downtimesFinished(QList<LibQupdownio::CheckError*> p_list);
 	void on_updateFinished(LibQupdownio::Check* p_check);
@@ -33,7 +35,7 @@ private:
 	Ui::MainWindow *ui;
 	Qupdownio *m_qupdownio;
 	QGraphicsDropShadowEffect *m_shadow;
-
+	QupdownioSettings *m_settings;
 };
 
 #endif // MAINWINDOW_H

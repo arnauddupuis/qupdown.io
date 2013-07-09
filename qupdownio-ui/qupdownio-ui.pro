@@ -31,13 +31,16 @@ RCC_DIR = $$OBJECTS_DIR
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    qupdowniosettings.cpp
+    qupdowniosettings.cpp \
+    qupdowniocheck.cpp
 
 HEADERS  += mainwindow.h \
-    qupdowniosettings.h
+    qupdowniosettings.h \
+    qupdowniocheck.h
 
 FORMS    += mainwindow.ui \
-    qupdowniosettings.ui
+    qupdowniosettings.ui \
+    qupdowniocheck.ui
 
 target.path = $$INSTALLDIR/bin
 win32:target.path = $$INSTALLDIR
